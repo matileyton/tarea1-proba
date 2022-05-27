@@ -24,5 +24,5 @@ if __name__ == "__main__":
     plt.show()
     plt.close()
 
-    #Punto 2
+    #Punto 6
 
