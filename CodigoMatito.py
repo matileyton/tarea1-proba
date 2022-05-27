@@ -23,3 +23,6 @@ if __name__ == "__main__":
     plt.title("Cantidad de Casos por Millon por País")
     plt.show()
     plt.close()
+
+    #Punto 2
+
