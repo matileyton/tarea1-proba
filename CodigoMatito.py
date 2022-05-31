@@ -25,4 +25,11 @@ if __name__ == "__main__":
     plt.close()
 
     #Punto 6
+    dCasesForContinent=df.groupby(by="Continent").sum()
 
+    print(dCasesForContinent.index.values)
+    
+    plt.pie(dCasesForContinent["Total Cases"].tolist(), labels = (dCasesForContinent.index.values.tolist()))
+    plt.title("Casos totales por continente")
+    plt.show()
+    plt.close()
