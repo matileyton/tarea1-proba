@@ -2,7 +2,6 @@ from cmath import log
 from tkinter import N
 import pandas as pd
 import numpy as np
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 '''
@@ -75,6 +74,30 @@ for x in c_eu:
         c2+=1
     elif x>= i1[0]:
         c1 +=1
-print(c1,c2,c3,c4,c5,c6)
-print(n)
-print(c1+c2+c3+c4+c5+c6)
+
+
+x=[str(i1),str(i2),str(i3),str(i4),str(i5),str(i6)]
+y=[c1,c2,c3,c4,c5,c6]
+
+plt.bar(x,y)
+plt.xticks(rotation=90)
+
+plt.title("Frecuencua en tintervalos de casos por millon en Europa")
+plt.show()
+plt.close
+
+head= ['N° Intervalo','Intervalo','Frecuencia']
+
+fre=[
+    ['1',str(i1),c1],
+    ['2',str(i2),c2],
+    ['3',str(i3),c3],
+    ['4',str(i4),c4],
+    ['5',str(i5),c5],
+    ['6',str(i6),c6]
+]
+
+from tabulate import tabulate
+
+print (tabulate(fre, headers=['N° Intervalo','Intervalo','Frecuencia']))
+
