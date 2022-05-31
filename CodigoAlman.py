@@ -32,6 +32,7 @@ fmhc = []
 for y in filtrocontinentes:
     fmhc.append(((filtromt[y]/filtropb[y]) * 1000000))
 
+'''
 plt.bar(filtrocontinentes, fmhc)
 plt.xlabel('Continentes')
 plt.xticks(rotation = 90)
@@ -39,6 +40,32 @@ plt.ylabel('Cantidad de fallecidos por millon de Habitantes')
 plt.title('GRAFICO 2')
 plt.show()
 plt.close()
+''' 
+
+plt.boxplot(fmhc)
+plt.show()
+
+mpmpc = {'mpm': fmhc, 'continentes': filtrocontinentes}
+mpmpcdf = pd.DataFrame(mpmpc)
+
+boxplot = mpmpcdf.boxplot(column=['mpm'])
+boxplot.plot()
+
+fig, ax = plt.subplots(figsize=(12, 8))
+grafico = archivo.boxplot(by = 'Continent', column=[archivo.columns.values[8]], grid = True, ax=ax, rot=90)
+grafico.set_ylabel('Muertes x Millon de Personas')
+grafico.plot()
+plt.show()
+plt.close()
+"""
+dataframe = {}
+for z in range(len(filtrocontinentes)):
+    dataframe[f'{filtrocontinentes[z]}'] = fmhc[z]
+
+print(dataframe)
+df = pd.DataFrame()
+boxplot = df.boxplot(column=['Col1'])
+""" 
 
 #GRAFICO 3
 casos = archivo['Casos Totales x 1M'].tolist()
