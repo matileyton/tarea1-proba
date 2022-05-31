@@ -1,3 +1,4 @@
+from cmath import log
 from tkinter import N
 import pandas as pd
 import numpy as np
@@ -34,15 +35,43 @@ p_eu=[]
 c_eu=[]
 tabla_europa.append(['Pais','Casos'])
 
+
 for x in dic:
     if x['continente']== 'Europe':
         tabla_europa.append([x['pais'] , x['casos']])
         p_eu.append(x['pais'])
         c_eu.append(x['casos'])
 
+
+'''
 for i in tabla_europa:
         print(i[0],i[1])
-    
+'''
+
+max = max(c_eu)
+min = min(c_eu)
+print(min,max)
+n = len(c_eu)
+rango = max - min
+ni= 1 + 3.32*log(n,10)
+i = rango/6
+print(rango , ni , i)
+i = round(i)
+
+
+i1=[min, min+i]
+i2=[min+i, min+2*i]
+i3=[min+2*i, min+3*i]
+i4=[min+3*i, min+4*i]
+i5=[min+4*i, min+5*i]
+i6=[min+5*i, max]
+
+
+print(i1,i2,i3,i4,i5,i6)
+
+
+
+'''  
 plt.bar(p_eu,c_eu)
 plt.xticks(np.arange(len(p_eu)), p_eu, rotation=80)
 plt.xlabel("Paises de Europa")
@@ -72,3 +101,5 @@ plt.ylabel("Casos de Covid por Millon")
 plt.title("Cantidad de Casos por Millon en Latinoamerica y el Caribe")
 plt.show()
 plt.close()
+
+'''
