@@ -25,7 +25,7 @@ archivo = archivo.rename(columns= {f'{archivo.columns.values[8]}':'Muertes Total
 casos = archivo['Casos Totales x 1M'].tolist()
 paises = archivo['Country'].tolist()
 continente = archivo['Continent'].tolist()
-#print(len(casos), len(paises), len(continente))
+
 dic=[]
 for x in range(len(casos)):
     dic.append({'pais':paises[x], 'continente':continente[x],'casos':casos[x] })
@@ -33,20 +33,11 @@ for x in range(len(casos)):
 tabla_europa=[]
 p_eu=[]
 c_eu=[]
-tabla_europa.append(['Pais','Casos'])
-
 
 for x in dic:
     if x['continente']== 'Europe':
-        tabla_europa.append([x['pais'] , x['casos']])
         p_eu.append(x['pais'])
         c_eu.append(x['casos'])
-
-
-'''
-for i in tabla_europa:
-        print(i[0],i[1])
-'''
 
 max = max(c_eu)
 min = min(c_eu)
@@ -58,48 +49,32 @@ i = rango/6
 print(rango , ni , i)
 i = round(i)
 
-
 i1=[min, min+i]
 i2=[min+i, min+2*i]
 i3=[min+2*i, min+3*i]
 i4=[min+3*i, min+4*i]
 i5=[min+4*i, min+5*i]
 i6=[min+5*i, max]
+c1=0
+c2=0
+c3=0
+c4=0
+c5=0
+c6=0
 
-
-print(i1,i2,i3,i4,i5,i6)
-
-
-
-'''  
-plt.bar(p_eu,c_eu)
-plt.xticks(np.arange(len(p_eu)), p_eu, rotation=80)
-plt.xlabel("Paises de Europa")
-plt.ylabel("Casos de Covid por Millon")
-plt.title("Cantidad de Casos por Millon en Europa")
-plt.show()
-plt.close()
-
-tabla_las=[]
-p_las=[]
-c_las=[]
-tabla_las.append(['Pais','Casos'])
-
-for x in dic:
-    if x['continente']== 'Latin America and the Caribbean':
-        tabla_las.append([x['pais'] , x['casos']])
-        p_las.append(x['pais'])
-        c_las.append(x['casos'])
-
-for i in tabla_las:
-        print(i[0],i[1])
-
-plt.bar(p_las,c_las)
-plt.xticks(np.arange(len(p_las)), p_las, rotation=80)
-plt.xlabel("Paises de Latinoamerica y el Caribe")
-plt.ylabel("Casos de Covid por Millon")
-plt.title("Cantidad de Casos por Millon en Latinoamerica y el Caribe")
-plt.show()
-plt.close()
-
-'''
+for x in c_eu:
+    if x>= i6[0]:
+        c6+=1
+    elif x>= i5[0]:
+        c5+=1
+    elif x>= i4[0]:
+        c4+=1
+    elif x>= i3[0]:
+        c3+=1
+    elif x>= i2[0]:
+        c2+=1
+    elif x>= i1[0]:
+        c1 +=1
+print(c1,c2,c3,c4,c5,c6)
+print(n)
+print(c1+c2+c3+c4+c5+c6)
