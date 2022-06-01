@@ -1,14 +1,10 @@
-from cmath import log
+from cmath import log, sqrt
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 
 '''
-(4) Genere una tabla de frecuencia para la cantidad de casos por mill ́on de habitantes para el continente europeo,
-junto con su gr ́afico de cantidades respectivo. Haga un proceso similar, pero ahora para Latinoamerica y el
-Caribe. Comente (y compare) los resultados destacando algo de inter ́es.
-
 (5) Con respecto a lo hecho en el ejercicio (4), btenga las principales medidas descriptivas de la variable “Casos
 por Mill ́on de habitantes”¿C ́omo es la simetrtriaa de la variable? Comente (y compare) los resultados destacando
 algo de inter ́es.
@@ -71,24 +67,13 @@ for x in c_eu:
         c2+=1
     elif x>= i1[0]:
         c1 +=1
-
-x=[str(i1),str(i2),str(i3),str(i4),str(i5),str(i6)]
-y=[c1,c2,c3,c4,c5,c6]
-
-plt.bar(x,y)
-plt.xticks(rotation=90)
-
-plt.title("Grafico de frecuencia por intervalo casos por millon en Europa")
-plt.show()
-plt.close
-
 fre=[
-    ['1',str(i1),c1],
-    ['2',str(i2),c2],
-    ['3',str(i3),c3],
-    ['4',str(i4),c4],
-    ['5',str(i5),c5],
-    ['6',str(i6),c6]
+    ['1',i1,c1],
+    ['2',i2,c2],
+    ['3',i3,c3],
+    ['4',i4,c4],
+    ['5',i5,c5],
+    ['6',i6,c6]
 ]
 
 i=0
@@ -99,9 +84,35 @@ for x in fre:
     x.append(i)
     x.append(x[2]/n)
     x.append(i/n)
+    x.append((x[1][0] + x[1][1])/2)
 
 
-print (tabulate(fre, headers=['N° Intervalo','Intervalo','Frecuencia', 'Frecuencia Absoluta','Frecuencia Relativa','Frecuencia Relativa Absoluta']))
+
+print (tabulate(fre, headers=['N° Intervalo','Intervalo','Frecuencia', 'Frecuencia Absoluta','Frecuencia Relativa','Frecuencia Relativa Absoluta','Marca de clase']))
+
+
+medes=[
+    ['Media',311032],
+    ['Moda',311032],
+    ['Varianza'],
+    ['Desviacion Estandar'],
+    ['Coeficiente de Sesgo']
+]
+vari=[]
+for x in fre:
+    vari.append([x[6],x[2]])
+
+
+
+medes[2].append(np.var(vari))
+medes[3].append(np.std(vari))
+medes[4].append((1/1-n)*((vari[0][0]-medes[0][1])**3+(vari[1][0]-medes[0][1])**3+(vari[2][0]-medes[0][1])**3+(vari[3][0]-medes[0][1])**3+(vari[4][0]-medes[0][1])**3+(vari[5][0]-medes[0][1])**3)/(np.std(vari))**3)
+
+print (tabulate(medes, headers=['Medida Descriptivas','Resultado']))
+
+
+
+
 
 #Latinoamerica y el Caribe
 p_las=[]
@@ -153,24 +164,14 @@ for x in c_las:
     elif x>= i1[0]:
         c1 +=1
 
-x=[str(i1),str(i2),str(i3),str(i4),str(i5),str(i6),str(i7)]
-y=[c1,c2,c3,c4,c5,c6,c7]
-
-plt.bar(x,y)
-plt.xticks(rotation=90)
-
-plt.title("Grafico de frecuencia por intervalo casos por millon en Latinoamerica y el Caribe")
-plt.show()
-plt.close
-
 fre=[
-    ['1',str(i1),c1],
-    ['2',str(i2),c2],
-    ['3',str(i3),c3],
-    ['4',str(i4),c4],
-    ['5',str(i5),c5],
-    ['6',str(i6),c6],
-    ['7',str(i7),c7]
+    ['1',i1,c1],
+    ['2',i2,c2],
+    ['3',i3,c3],
+    ['4',i4,c4],
+    ['5',i5,c5],
+    ['6',i6,c6],
+    ['7',i7,c7]
 ]
 
 i=0
@@ -181,6 +182,26 @@ for x in fre:
     x.append(i)
     x.append(x[2]/n)
     x.append(i/n)
+    x.append((x[1][0] + x[1][1])/2)
 
 
-print (tabulate(fre, headers=['N° Intervalo','Intervalo','Frecuencia', 'Frecuencia Absoluta','Frecuencia Relativa','Frecuencia Relativa Absoluta']))
+print (tabulate(fre, headers=['N° Intervalo','Intervalo','Frecuencia', 'Frecuencia Absoluta','Frecuencia Relativa','Frecuencia Relativa Absoluta','Marca de clase']))
+
+medes=[
+    ['Media',150946],
+    ['Moda',32287],
+    ['Varianza'],
+    ['Desviacion Estandar'],
+    ['Coeficiente de Sesgo']
+]
+varo=[]
+for x in fre:
+    varo.append([x[6],x[2]])
+
+
+
+medes[2].append(np.var(varo))
+medes[3].append(np.std(varo))
+medes[4].append((1/1-n)*((varo[0][0]-medes[0][1])**3+(varo[1][0]-medes[0][1])**3+(varo[2][0]-medes[0][1])**3+(varo[3][0]-medes[0][1])**3+(varo[4][0]-medes[0][1])**3+(varo[5][0]-medes[0][1])**3+(varo[6][0]-medes[0][1])**3)/(np.std(vari))**3)
+
+print (tabulate(medes, headers=['Medida Descriptivas','Resultado']))
