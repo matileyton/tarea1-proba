@@ -1,8 +1,8 @@
 from cmath import log
-from tkinter import N
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+# from tabulate import tabulate
 
 '''
 (4) Genere una tabla de frecuencia para la cantidad de casos por mill ́on de habitantes para el continente europeo,
@@ -28,32 +28,29 @@ continente = archivo['Continent'].tolist()
 dic=[]
 for x in range(len(casos)):
     dic.append({'pais':paises[x], 'continente':continente[x],'casos':casos[x] })
-
-tabla_europa=[]
+#Europa
 p_eu=[]
 c_eu=[]
 
 for x in dic:
     if x['continente']== 'Europe':
         p_eu.append(x['pais'])
-        c_eu.append(x['casos'])
+        c_eu.append(int(x['casos']))
 
-max = max(c_eu)
-min = min(c_eu)
-print(min,max)
+ma = max(c_eu)
+mi = min(c_eu)
 n = len(c_eu)
-rango = max - min
+rango = ma - mi
 ni= 1 + 3.32*log(n,10)
 i = rango/6
-print(rango , ni , i)
 i = round(i)
 
-i1=[min, min+i]
-i2=[min+i, min+2*i]
-i3=[min+2*i, min+3*i]
-i4=[min+3*i, min+4*i]
-i5=[min+4*i, min+5*i]
-i6=[min+5*i, max]
+i1=[mi, mi+i]
+i2=[mi+i, mi+2*i]
+i3=[mi+2*i, mi+3*i]
+i4=[mi+3*i, mi+4*i]
+i5=[mi+4*i, mi+5*i]
+i6=[mi+5*i, ma]
 c1=0
 c2=0
 c3=0
@@ -75,18 +72,15 @@ for x in c_eu:
     elif x>= i1[0]:
         c1 +=1
 
-
 x=[str(i1),str(i2),str(i3),str(i4),str(i5),str(i6)]
 y=[c1,c2,c3,c4,c5,c6]
 
 plt.bar(x,y)
 plt.xticks(rotation=90)
 
-plt.title("Frecuencua en tintervalos de casos por millon en Europa")
+plt.title("Grafico de frecuencia por intervalo casos por millon en Europa")
 plt.show()
 plt.close
-
-head= ['N° Intervalo','Intervalo','Frecuencia']
 
 fre=[
     ['1',str(i1),c1],
@@ -97,7 +91,96 @@ fre=[
     ['6',str(i6),c6]
 ]
 
-from tabulate import tabulate
+i=0
+n = len(c_eu)
 
-print (tabulate(fre, headers=['N° Intervalo','Intervalo','Frecuencia']))
+for x in fre:
+    i += x[2]
+    x.append(i)
+    x.append(x[2]/n)
+    x.append(i/n)
 
+
+# print (tabulate(fre, headers=['N° Intervalo','Intervalo','Frecuencia', 'Frecuencia Absoluta','Frecuencia Relativa','Frecuencia Relativa Absoluta']))
+
+#Latinoamerica y el Caribe
+p_las=[]
+c_las=[]
+
+for x in dic:
+    if x['continente']== 'Latin America and the Caribbean':
+        p_las.append(x['pais'])
+        c_las.append(int(x['casos']))
+
+
+ma = max(c_las)
+mi = min(c_las)
+n = len(c_las)
+rango = ma - mi
+ni= 1 + 3.32*log(n,10)
+i = rango/7
+i = round(i)
+
+i1=[mi, mi+i]
+i2=[mi+i+1, mi+2*i]
+i3=[mi+2*i+1, mi+3*i]
+i4=[mi+3*i+1, mi+4*i]
+i5=[mi+4*i+1, mi+5*i]
+i6=[mi+5*i+1, mi+6*i]
+i7=[mi+6*i+1, ma]
+
+c1=0
+c2=0
+c3=0
+c4=0
+c5=0
+c6=0
+c7=0
+
+for x in c_las:
+    if x>= i7[0]:
+        c7+=1
+    elif x>= i6[0]:
+        c6+=1
+    elif x>= i5[0]:
+        c5+=1
+    elif x>= i4[0]:
+        c4+=1
+    elif x>= i3[0]:
+        c3+=1
+    elif x>= i2[0]:
+        c2+=1
+    elif x>= i1[0]:
+        c1 +=1
+
+x=[str(i1),str(i2),str(i3),str(i4),str(i5),str(i6),str(i7)]
+y=[c1,c2,c3,c4,c5,c6,c7]
+
+plt.bar(x,y)
+plt.xticks(rotation=90)
+
+plt.title("Grafico de frecuencia por intervalo casos por millon en Latinoamerica y el Caribe")
+plt.show()
+plt.close
+
+fre=[
+    ['1',str(i1),c1],
+    ['2',str(i2),c2],
+    ['3',str(i3),c3],
+    ['4',str(i4),c4],
+    ['5',str(i5),c5],
+    ['6',str(i6),c6],
+    ['7',str(i7),c7]
+]
+
+i=0
+n = len(c_las)
+
+for x in fre:
+    i += x[2]
+    x.append(i)
+    x.append(x[2]/n)
+    x.append(i/n)
+
+
+# print (tabulate(fre, headers=['N° Intervalo','Intervalo','Frecuencia', 'Frecuencia Absoluta','Frecuencia Relativa','Frecuencia Relativa Absoluta']))
